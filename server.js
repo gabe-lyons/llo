@@ -48,7 +48,11 @@ app.use('/', express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
   // Searches through our database for all Post objects that match our query.
   Post.find({}, function(err, posts) {
-    res.render('home', {posts: posts});
+    if (err) {
+      res.status(500).send('There was an error fetching posts.');
+    } else {
+      res.render('home', {posts: posts});
+    }
   })
 })
 
@@ -60,11 +64,16 @@ app.post('/submit', function (req, res) {
   var newPost = new Post({
     content : content,
   });
-  newPost.save();
-  res.redirect('/');
+  newPost.save(function(err) {
+    if (err) {
+      res.status(500).send('There was an error saving your post.');
+    } else {
+      res.redirect('/');
+    }
+  });
 })
 
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function () {
-  console.log('Llo listening at http://%s:%s', 'localhost', port);
+  console.log('Llo listening at http://localhost:' + port);
 })
