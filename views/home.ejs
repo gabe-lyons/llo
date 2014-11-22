@@ -1,0 +1,12 @@
+<div class="composer">
+  <form action="/submit" method="post">
+    <input type="text" name="content"> 
+  </form>
+</div>
+<div class="posts">
+  <% for(var i=0; i<posts.length; i++) {%>
+    <div class="post">
+      <%= posts[i].content %>
+    </div>
+  <% } %>
+</div>
