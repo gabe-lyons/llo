@@ -1,3 +1,21 @@
 .post {
   font-size: 18px;
 }
+
+.posts {
+  clear: both;
+}
+
+.title {
+  font-size: 90px;
+  float: left;
+}
+
+.composer {
+  font-size: 20px;
+  float: left;
+}
+
+body {
+  font-family: AtlasTypewriterRegular, 'Andale Mono', Consolas, 'Lucida Console', Menlo, 'Luxi Mono', monospace;
+}
