@@ -1,13 +1,24 @@
-<% layout('layout') %>
-<div class="composer">
-  <form action="/submit" method="post">
-    <input type="text" name="content"> 
-  </form>
-</div>
-<div class="posts">
-  <% for(var i=0; i<posts.length; i++) {%>
-    <div class="post">
-      <%= posts[i].content %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>llo</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="composer">
+      <form action="/submit" method="post">
+        <input type="text" name="content"> 
+      </form>
     </div>
-  <% } %>
-</div>
+    <div class="posts">
+      <% for (var i = 0; i < posts.length; i++) { %>
+        <div class="post">
+          <%= posts[i].content %>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>

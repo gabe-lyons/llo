@@ -1,5 +1,4 @@
 var express = require('express');
-var engine = require('ejs-locals');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
@@ -30,9 +29,6 @@ var Post = mongoose.model('Post', PostSchema);
 // This tells node how to parse POST parameters.
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Tells the server to associate the ejs engine with the ejs-locals package.
-app.engine('ejs', engine);
-
 // Sets the template rendering engine in node to be embedded javascript.
 app.set('view engine', 'ejs');
 
@@ -53,8 +49,8 @@ app.get('/', function (req, res) {
     } else {
       res.render('home', {posts: posts});
     }
-  })
-})
+  });
+});
 
 /*
  * Defines the actions we take when the user submits a post 
@@ -71,9 +67,9 @@ app.post('/submit', function (req, res) {
       res.redirect('/');
     }
   });
-})
+});
 
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function () {
-  console.log('Llo listening at http://localhost:' + port);
-})
+  console.log('llo listening at http://localhost:' + port);
+});
