@@ -20,6 +20,7 @@
     "mongoose": "~3.8.19",
     "express": "~4.10.2",
     "ejs": "~1.0.0",
-    "body-parser": "~1.9.x"
+    "body-parser": "~1.9.x",
+    "underscore": "~1.7.x"
   }
 }
