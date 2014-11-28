@@ -42,34 +42,25 @@ app.use('/', express.static(__dirname + '/public'));
  * Defines the actions we take when the user hits our main page.
  */
 app.get('/', function (req, res) {
-  // Searches through our database for all Post objects that match our query.
-  Post.find({}, function(err, posts) {
-    if (err) {
-      res.status(500).send('There was an error fetching posts.');
-    } else {
-      res.render('home', {posts: posts});
-    }
-  });
+  // Step 1: Search through our database for all Posts that match our query
+  // using Posts.find({}, function(err, posts) { <do something> })
+
+  // Step 2: Render these posts inside the find callback function using 
+  // res.render('home', { <param1> : <value1> })
+
 });
 
 /*
  * Defines the actions we take when the user submits a post 
  */
 app.post('/submit', function (req, res) {
-  // reads the content field sent by the POST request
+  // Step 1: read the content field sent by the POST request
   var content = req.body.content;
-  // creates a new post object to save to our database
-  var newPost = new Post({
-    content : content,
-  });
-  // saves the post to our database
-  newPost.save(function(err) {
-    if (err) {
-      res.status(500).send('There was an error saving your post.');
-    } else {
-      res.redirect('/');
-    }
-  });
+  // Step 2: create a new Post object, var post = new Post({ <param1> : <value1>}) 
+
+  // Step 3: save the post to our database using the post.save() method.
+
+  // Step 4: Redirect the user back to our home page using res.redirect(<url>)
 });
 
 var port = process.env.PORT || 3000;
