@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
-var app = express();
+/* DATABASE CONFIGURATION */
 
 /*
  * Here we connect as a demo user to our demo database. If you want control
@@ -26,17 +26,28 @@ var PostSchema = mongoose.Schema({
 var Post = mongoose.model('Post', PostSchema);
 
 
-// This tells node how to parse POST parameters.
-app.use(bodyParser.urlencoded({extended: false}));
+/* SERVER CONFIGURATION */
 
-// Sets the template rendering engine in node to be embedded javascript.
+var app = express();
+
+/*
+ * Sets the template rendering engine in of express to be embedded javascript,
+ * and for it to look in the ./views/ directory for the templates.
+ */
 app.set('view engine', 'ejs');
-
-// Tells the server to look in the /views/ directory for templates.
 app.set('views', __dirname + '/views');
 
-// Allows server to serve files directly out of the public folder.
+/*
+ * Here we define middleware, things to do before moving on to our own request
+ * handlers. All of these app.*'s are done in the order that a request would be
+ * processed, so order matters! Here we:
+ *
+ *  1. Check if the request matches a static file in /public/ if so, then simply
+ *     serve it.
+ *  2. Extract url encoded parameters on requests and put it in req.body
+ */
 app.use('/', express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({extended: false}));
 
 /*
  * Defines the actions we take when the user hits our main page.
@@ -63,6 +74,10 @@ app.post('/submit', function (req, res) {
   // Step 4: Redirect the user back to our home page using res.redirect(<url>)
 });
 
+/*
+ * Start up the server and listen to the environment's PORT variable,
+ * (useful for deployment) or a default port, 3000.
+ */
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function () {
   console.log('Llo listening at http://localhost:' + port);
