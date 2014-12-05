@@ -38,27 +38,27 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
 /*
- * Defines the actions we take when the user hits our main page.
- */
-// Step 1: Search through our database for all Posts that match our query
-// using Posts.find({}, function(err, posts) { <do something> })
-
-// Step 2: Render these posts inside the find callback function using 
-// res.render('home', { <param1> : <value1> })
-app.get('/', function (req, res) {
-  // put your code for your homepage here
-});
-
-/*
  * Here we define middleware, things to do before moving on to our own request
  * handlers. All of these app.*'s are done in the order that a request would be
  * processed, so order matters! Here we:
- *
- *  1. Check if the request matches a static file in /public/ if so, then simply
- *     serve it.
- *  2. Extract url encoded parameters on requests and put it in req.body
  */
-app.use('/', express.static(__dirname + '/public'));
+
+/*
+ * Defines the actions we take when the user hits our main page.
+ *
+ * Step 1: Search through our database for all Posts that match our query
+ * using Posts.find({}, function(err, posts) { <do something> })
+ *
+ * Step 2: Render these posts inside the find callback function using 
+ * res.render('home', { <param1> : <value1> })
+ */
+app.get('/', function (req, res) {
+  // Put your code for your homepage here.
+});
+
+/*
+ * Extract url encoded parameters on requests and put it in req.body
+ */
 app.use(bodyParser.urlencoded({extended: false}));
 
 /*
@@ -73,6 +73,12 @@ app.post('/submit', function (req, res) {
 
   // Step 4: Redirect the user back to our home page using res.redirect(<url>)
 });
+
+/*
+ * Check if the request matches a static file in /public/ if so, then simply
+ * serve it.
+ */
+app.use('/', express.static(__dirname + '/public'));
 
 /*
  * Start up the server and listen to the environment's PORT variable,
